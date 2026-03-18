@@ -18,48 +18,6 @@ public class Exam02 {
 		 * */
 		
 		Scanner scan = new Scanner(System.in);
-//		
-//		System.out.println("첫번째 숫자 입력 >");
-//		int num1 = scan.nextInt();
-//		System.out.println("내가 입력한 값 : " + num1);
-//		
-//		System.out.println("두번째 숫자 입력 >");
-//		int num2 = scan.nextInt();
-//		System.out.println("내가 입력한 값 : " + num2);
-//		
-//		System.out.println("연산자 입력 >");
-//		String str = scan.next();
-//		System.out.println("내가 입력한 값 : " + str);
-//		
-//		switch (str) {
-//		case "+" :
-//			System.out.printf("%d + %d = %d", num1, num2, num1 + num2 );
-//			break;
-//		case "-" :
-//			System.out.printf("%d - %d = %d", num1, num2, num1 - num2 );
-//			break;
-//		case "*" :
-//			System.out.printf("%d * %d = %d", num1, num2, num1 * num2 );
-//			break;
-//		case "/" :
-//			System.out.printf("%d / %d = %d", (double)num1, (double)num2, (double)num1 / num2 );
-//			break;	
-//		case "%" :
-//			System.out.printf("%d  mod  %d = %d", num1, num2, num1 % num2 );
-//			break;	
-//		default :
-//			System.out.println("다시 입력하세요.");
-//		}
-		
-		// char 형태로 입력받기
-//		System.out.println(">>>");
-//		char op = scan.next().charAt(0); 
-//		System.out.println(op);
-		
-		// String 형태로 입력받기
-		System.out.println(">>>");
-		String opStr = scan.next(); 
-		System.out.println(opStr);
 		
 		// 1. switch 이용
 
@@ -82,39 +40,103 @@ public class Exam02 {
 		
 		// 1. switch 이용
 //		switch (op) {
-//		case '+' System.out.println(num1 + num2); break;
-//		case '-' System.out.println(num1 - num2); break;
-//		case '*' System.out.println(num1 * num2); break;
-//		case '/' System.out.println(num1 / num2); break;
-//		case '%' System.out.println(num1 % num2); break;
+//		case '+' System.out.println("" + num1 + op +  num2 + "=" + (num1 + num2); break;
+//		case '-' System.out.println("" + num1 + op +  num2 + "=" + (num1 - num2); break;
+//		case '*' System.out.println("" + num1 + op +  num2 + "=" + (num1 * num2); break;
+//		case '/' System.out.println("" + num1 + op +  num2 + "=" + (num1 / num2); break;
+//		case '%' System.out.println("" + num1 + op +  num2 + "=" + (num1 % num2); break;
 //		default : System.out.println("잘못된 연산자");
 //		}
 		
-		int result = 0;
-		switch (op) {
-		case '+' result = num1 + num2; break;
-		case '-' result = num1 - num2; break;
-		case '*' result = num1 * num2; break;
-		case '/' result = num1 / num2; break;
-		case '%' result = num1 % num2; break;
-		default : System.out.println("잘못된 연산자");
+//		// 2. switch 이용 변수 result이용
+//		int result = 0;
+//		switch (op) {
+//		case '+' result = num1 + num2; break;
+//		case '-' result = num1 - num2; break;
+//		case '*' result = num1 * num2; break;
+//		case '/' result = num1 / num2; break;
+//		case '%' result = num1 % num2; break;
+//		default : System.out.println("잘못된 연산자");
+//		}
+//		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '%') {
+//		System.out.println("" + num1 + op + num2 + "=" +result);
+//		}
+//		
+		// 3. if문 사용 (char)
+		int ifResult = 0;
+		if (op == '+') {
+			ifResult = num1 + num2;
+		} else if (op == '-') {
+			ifResult = num1 + num2;
+		} else if (op == '*') {
+			ifResult = num1 + num2;
+		} else if (op == '/') {
+			ifResult = num1 + num2;
+		} else if (op == '%') {
+			ifResult = num1 + num2;
+		} else {
+			System.out.println("잘못된 연산자");
 		}
 		
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '%') {
+		System.out.println("" + num1 + op + num2 + "=" + ifResult);
+		}
 
+//		// String 형태로 입력받기
+		System.out.println(">>>");
+		String opStr = scan.next(); 
+		System.out.println(opStr);
+		
+		// 4. if문 사용 (String)
+		ifResult = 0; // 앞에서 쓴 ifResult 초기화
+		if (opStr.equals("+")) {
+			ifResult = num1 + num2;
+		} else if (opStr.equals("-")) {
+			ifResult = num1 - num2;
+		} else if (opStr.equals("*")) {
+			ifResult = num1 * num2;
+		} else if (opStr.equals("/")) {
+			ifResult = num1 / num2;
+		} else if (opStr.equals("%")) {
+			ifResult = num1 % num2;
+		} else {
+			System.out.println("잘못된 연산자");
+		}
+		if (opStr == "+" || opStr == "-" || opStr == "*" || opStr == "/" || opStr == "%") {
+			System.out.println("" + num1 + opStr + num2 + "=" +ifResult);
+			}
+		
+//		System.out.println("첫번째 숫자 입력 >");
+//		int num1 = scan.nextInt();
+//		System.out.println("내가 입력한 값 : " + num1);
 //		
-//		switch(op) {
-//		case '+':  break;
-//			// switch일 경우 예제
-//		}
+//		System.out.println("두번째 숫자 입력 >");
+//		int num2 = scan.nextInt();
+//		System.out.println("내가 입력한 값 : " + num2);
 //		
-//		// String로 받을 때
-//		String str = scan.next();
-//		if (str.equals("+")){	
-//		}
-//		
-//		switch(str) {
-//		case "+":  break;
-//		}
+//		System.out.println("연산자 입력 >");
+//		String opStr = scan.next();
+//		System.out.println("내가 입력한 값 : " + opStr);
+		
+		switch (opStr) {
+		case "+" :
+			System.out.printf("%d + %d = %d", num1, num2, num1 + num2 );
+			break;
+		case "-" :
+			System.out.printf("%d - %d = %d", num1, num2, num1 - num2 );
+			break;
+		case "*" :
+			System.out.printf("%d * %d = %d", num1, num2, num1 * num2 );
+			break;
+		case "/" :
+			System.out.printf("%d / %d = %d", (double)num1, (double)num2, (double)num1 / num2 );
+			break;	
+		case "%" :
+			System.out.printf("%d  mod  %d = %d", num1, num2, num1 % num2 );
+			break;	
+		default :
+			System.out.println("다시 입력하세요.");
+		}
 
 		scan.close();
 	}
