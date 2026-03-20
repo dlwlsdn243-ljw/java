@@ -16,60 +16,102 @@ public class Exam03 {
 		
 		Scanner scan = new Scanner(System.in);
 		
-		int num1 = 0;
-		int num2 = 0;
-		int menu = 0;
+//		int num1 = 0;
+//		int num2 = 0;
+//		int menu = 0;
+//		
+//		do {
+//			System.out.println("--memu--");
+//			System.out.println("1. + | 2. - | 3. * | 4. / | 5. % | 6. 종료");
+//			System.out.println("menu > ");
+//			menu = scan.nextInt();
+//			if (menu == 6) {
+//				System.out.println("종료합니다.");
+//				break;
+//			} 
+//			
+//			System.out.println("첫번째 숫자를 입력해 주세요.");
+//			num1 = scan.nextInt();
+//			System.out.println("두번째 숫자를 입력해 주세요.");
+//			num2 = scan.nextInt();
+//			
+//			// 실제 기능 처리 구현 구문
+//			switch(menu) {
+//			case 1: 
+//				System.out.println(num1 + "+" + num2 + "=" + (num1+num2));
+//				break;
+//			case 2: 
+//				System.out.println(num1 + "-" + num2 + "=" + (num1-num2));
+//				break;
+//			case 3: 
+//				System.out.println(num1 + "*" + num2 + "=" + (num1*num2));
+//				break;
+//			case 4: 
+//				if (num2 == 0) {
+//					 System.out.println("num2를 다시 입력해주세요.");
+//				} else {
+//					System.out.println(num1 + "/" + num2 + "=" + (double)(num1/num2));		
+//				}
+//				break;
+//			case 5: 
+//				if (num2 == 0) {
+//					 System.out.println("num2를 다시 입력해주세요.");
+//				} else {
+//					System.out.println(num1 + "%" + num2 + "=" + (num1%num2));		
+//				}
+//				break;	
+//		
+//			default : 
+//				System.out.println("잘못된 입력 입니다.");
+//			}
+//			
+//		} while (menu != 6);
 		
+		// //////////////////////////////////////////////////////////////////////////////////////////
+		
+		int menu = 0;
 		do {
-			System.out.println("--memu--");
-			System.out.println("1. + | 2. - | 3. * | 4. / | 5. % | 6. 종료");
-			System.out.println("menu > ");
+			System.out.println("---menu---");
+			System.out.println("1.+ | 2.- | 3.* | 4./ | 5.% | 6.종료");
+			System.out.println("menu>");
 			menu = scan.nextInt();
-			if (menu == 6) {
+			
+			if(menu == 6) {
 				System.out.println("종료합니다.");
 				break;
-			} 
+			}else if(menu <=0 || menu > 6){
+				System.out.println("잘못된 메뉴!!");
+			}else {
 			
-			System.out.println("첫번째 숫자를 입력해 주세요.");
-			num1 = scan.nextInt();
-			System.out.println("두번째 숫자를 입력해 주세요.");
-			num2 = scan.nextInt();
-			
-			// 실제 기능 처리 구현 구문
-			switch(menu) {
-			case 1: 
-				System.out.println(num1 + "+" + num2 + "=" + (num1+num2));
-				break;
-			case 2: 
-				System.out.println(num1 + "-" + num2 + "=" + (num1-num2));
-				break;
-			case 3: 
-				System.out.println(num1 + "*" + num2 + "=" + (num1*num2));
-				break;
-			case 4: 
-				if (num2 == 0) {
-					 System.out.println("num2를 다시 입력해주세요.");
-				} else {
-					System.out.println(num1 + "/" + num2 + "=" + (double)(num1/num2));		
+				
+				System.out.println("두 숫자를 입력해주세요 (2 3)>");
+				int num1 = scan.nextInt();
+				int num2 = scan.nextInt();
+				
+				while(num2 == 0 && (menu == 4 || menu == 5)) {
+					System.out.println("피연산자가 0입니다. ");
+					System.out.println("num2를 다시 입력해주세요.");
+					num2 = scan.nextInt();
 				}
-				break;
-			case 5: 
-				if (num2 == 0) {
-					 System.out.println("num2를 다시 입력해주세요.");
-				} else {
-					System.out.println(num1 + "%" + num2 + "=" + (num1%num2));		
+				
+				switch(menu) {
+				case 1: System.out.println(num1+"+"+num2+"="+(num1+num2)); break;
+				case 2: System.out.println(num1+"-"+num2+"="+(num1-num2)); break;
+				case 3: System.out.println(num1+"*"+num2+"="+(num1*num2)); break;
+				case 4: System.out.println(num1+"/"+num2+"="+(num1/num2)); break;
+				case 5: System.out.println(num1+"%"+num2+"="+(num1%num2)); break;
+				case 6:  break;
+				default: break;
 				}
-				break;	
-		
-			default : 
-				System.out.println("잘못된 입력 입니다.");
 			}
 			
-		} while (menu != 6);
+		}while(menu != 6);
 		
+		System.out.println("프로그램 종료");
+
 		scan.close();
-
-
+	
+		
 	}
-
 }
+
