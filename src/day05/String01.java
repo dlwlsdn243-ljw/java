@@ -69,10 +69,7 @@ public class String01 {
 		System.out.println("a".compareTo("e")); // e 기준으로 a가 뒤로 4칸
 		System.out.println("e".compareTo("a")); // e 기준으로 a가 앞으로 4칸
 		
-		// contains : 해당 문자를 포함하고 있는지 체크 true / false
-		System.out.println("---contains---");
-		System.out.println(str.contains("abc"));
-		System.out.println(str.contains("abcd"));
+		
 		
 		// concat : 이어붙이기 ( + 연결연산자와 같은 의미 )
 		System.out.println("---concat---");

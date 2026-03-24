@@ -35,6 +35,7 @@ public class Array03 {
 		
 		System.out.println("------------------------------------------------------");
 		
+		// 최대값 , 최소값
 		max = 0;
 		min = 100;
 		for (int i = 0; i < arr.length; i++) {

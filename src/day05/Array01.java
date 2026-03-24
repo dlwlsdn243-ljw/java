@@ -112,12 +112,12 @@ public class Array01 {
 		
 		System.out.println("------------------------------");
 		
-		System.out.println(arr5.toString()); 
+		System.out.println(arr5.toString());  // 주소값 출력
 		
 		System.out.println("------------------------------");
 		
 		//Arrays클래스 toString
-		System.out.println(Arrays.toString(arr));
+		System.out.println(Arrays.toString(arr)); // 배열 상태로 출력
 		System.out.println(Arrays.toString(arr5));
 
 	}
