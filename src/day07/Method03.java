@@ -42,6 +42,60 @@ public class Method03 {
 		}
 		return num1 % num2;
 	}
+	
+	// print
+	// 2 + 3 = 00 모양으로 출력하는 메서드
+	// System.out.println(num1 + "+" + num2 + "=" + sum); 
+	// 매개변수 : int num1, String op, int num2, int result
+	// 리턴타입 : void (직접출력은 void)
+	
+	public void print(int num1, String op, int num2, int result) {
+		if (result == -99999999) {
+			System.out.println("0으로 나눌수 없습니다.");
+			return;
+		}
+		System.out.println(num1 + op + num2 + "=" + result);
+	}
+	
+	// 메서드 오버로딩 : 같은 기능을 하는 이름이 같은 메서드를 여러개 정리
+	// 같은 기능을 다른 형태의 변수에서 사용하기 위해
+	// 오버러딩 조건 : 매개변수의 타입이 다르거나. 매개변수의 개수가 달라야 한다.
+	public void print(int num1, String op, int num2, double result) {
+		if (result == -99999999) {
+			System.out.println("0으로 나눌수 없습니다.");
+			return;
+		}
+		System.out.printf("%d%s%d=%.2f\n", num1, op, num2, result);
+	}
+	
+	// String 리턴
+	// print
+	// 2 + 3 = 00 모양으로 출력하는 메서드
+	// System.out.println(num1 + "+" + num2 + "=" + sum); 
+	// 매개변수 : int num1, String op, int num2, int result
+	// 리턴타입 : String
+	
+	public String toPrint(int num1, String op, int num2, int result) {
+		if (result == -99999999) {
+			return "0으로 나눌수 없습니다.";
+		}
+		return  num1 + op + num2 + "=" + result;
+	}
+	
+	public String toPrint(int num1, String op, int num2, double result) {
+		if (result == -99999999) {
+			return "0으로 나눌수 없습니다.";
+		}
+		return  num1 + op + num2 + "=" + result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		// 메서드 실행
 		// 1. 클래스로 객체를정의  클래스명 객체명 = new 클래스명();

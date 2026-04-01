@@ -16,7 +16,7 @@ public class MathodEx01 {
 		 * 덧셈... 메서드는 Method03에서 호출하여 사용
 		 * */
 		
-		Method03 m3 = new Method03();
+		Method03 m3 = new Method03 ();
 		Scanner scan = new Scanner(System.in);
 		
 		int menu = 0;
@@ -28,7 +28,7 @@ public class MathodEx01 {
 			
 			if(menu == 6) {
 				System.out.println("종료합니다.");
-				break;
+				continue;
 
 			}
 				
@@ -67,7 +67,7 @@ public class MathodEx01 {
 					}
 					break;			
 				}
-		}while(menu == 6);
+		}while(menu != 6);
 		System.out.println("프로그램 종료");
 		scan.close();
 		

@@ -47,6 +47,7 @@ public class Method02 {
 	
 	
 	public static void main(String[] args) {
+		
 		// 메서드 호출 -> 출력
 		Method02 me02 = new Method02(); // 객체변수 (참조변수) me02
 		int num1= 10; // 지역변수 (일반변수) num1
