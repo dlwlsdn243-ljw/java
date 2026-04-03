@@ -7,9 +7,9 @@ public class List01 {
 
 	public static void main(String[] args) {
 		// List => ArrayList
-		List<Integer>list = new ArrayList<>();
+		List<Integer>list = new ArrayList<Integer>();
 		
-		// add() : 요소를 추가 => qoduf arr[0] = 1; 이거와 같은 의미
+		// add() : 요소를 추가 => poduf arr[0] = 1; 이거와 같은 의미
 		list.add(1); // 0번지에 1이 추가 (오토박싱 int => Integer 자동 박싱)
 		list.add(new Integer(2)); // 직접 객체 생성 후 저장 => 안씀.
 		list.add(3);
