@@ -1,19 +1,27 @@
 package costomExcepion;
 
-public class Order extends Product{
+public class Order {
+	// 이름(product 객체를 멤버변수로...), 수량
+	private Product product;
+	private int count;
 	
-//	order - 구매 클래스
-//	이름, 몇개
-	
-	private int count; // 주문수량
-	
-	public Order () {}
-	public Order (String name, int count) {
-		super.setName(name);
+	public Order() {}
+	public Order(Product product, int count) {
+		this.product = product;
 		this.count = count;
 	}
 	
+	// 멤버변수로 저장하지 않고 계산 결과만 리턴
+	public int getTotalPrice() {
+		return product.getPrice() * count;
+	}
 	
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	public int getCount() {
 		return count;
 	}
@@ -22,7 +30,7 @@ public class Order extends Product{
 	}
 	@Override
 	public String toString() {
-		return "Order [count=" + count + "]";
+		return "Order [product=" + product + ", count=" + count + "]";
 	}
-
+	
 }
