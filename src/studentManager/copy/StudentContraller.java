@@ -7,30 +7,32 @@ import java.util.Scanner;
 public class StudentContraller implements StudentProgram {
 	
 	// 학생 배열을 생성 
-//	private Student[] student = new Student[5]; 
 	private List<Student> student = new ArrayList<>();
-	private int cnt;
 	
 	// 수강 신청을 위한 과목 목록 배열 : 수강 신청이 가능한 모든 과목 목록
 	private List<Subject> subList = new ArrayList<>();
 	
-	
-//	public StudentController() {  // 생성자에서 객체를 생성
-//		student = new Student[5];
-//	}
 
+	
 	// 학생 미리 등록
 	public void addStudent() {
-		// TODO Auto-generated method stub
-		student.add( new Student("1", "이순신", 21, "010-1111-1111", "서울시"));
-		student.add ( new Student("2", "박철수", 20, "010-1111-1111", "부산시"));
-		student.add ( new Student("3", "이순이", 20, "010-1111-1111", "광주시"));
-
+		// add 값을 추가할 때 꼭 object를 생성해서 (new) 추가
+		// 하나의 객체로 공유
+		// Student s = new Student();
+//		s.setStudentNumber("1");
+//		student.add(s);
+//		s.setStudentNumber("2");
+//		student.add(s);
+		student.add(new Student("1", "이순신", 21, "010-1111-1111", "서울시"));
+		student.add(new Student("2", "박철수", 20, "010-1111-1111", "부산시"));
+		student.add(new Student("3", "이순이", 20, "010-1111-1111", "광주시"));
 		
 	}
 	
 	// 수강과목 미리 등록
 	public void addSubject() {
+		// (String subjectCode, String subjectName, String subjectTime, String subjectProfessor,
+		//String subjectRoom)
 		subList.add(new Subject("111", "C언어", "3", "홍길동", "A강의장"));
 		subList.add(new Subject("222", "JAVA", "2", "김길동", "B강의장"));
 		subList.add(new Subject("333", "javaScript", "3", "최길동", "C강의장"));
@@ -38,19 +40,11 @@ public class StudentContraller implements StudentProgram {
 		subList.add(new Subject("555", "react", "3", "박길동", "E강의장"));
 	}
 	
-	// 학번을 스케너에서 받아 학생 배열에서 해당 학번의 번지를 리턴해주는 메서드
-	public int indexSearch(Scanner scan) {
-		System.out.println("학번");
-		String num = scan.next();
-		for(int i=0; i<cnt; i++) {
-			if(student.get(i).getStudentNumber().equals(num)) {
-				
-			}
-		}
-		return -1;
-		
+	public String studentNumInput(Scanner scan) {
+		System.out.println("학번>");
+		return scan.next();
 	}
-
+	
 	// 수강 신청시 신청가능한 목록을 출력하는 메서드
 	public void printSubList() {
 		int i=1;
@@ -65,16 +59,13 @@ public class StudentContraller implements StudentProgram {
 
 	@Override
 	public void insertStudent(Scanner scan) {
-		// TODO Auto-generated method stub
-		System.out.println("학번>");
-		String num = scan.next();
+		// indexSearch 메서드 사용 후
+		// 학번 중복불가 처리
+		String num = studentNumInput(scan);
 		
-		// 학번에 대한 중복 불가 처리
-		for(int i=0; i<cnt; i++) {
-			if(student.get(i).getStudentNumber().equals(num)) {
-				System.out.println("학번이 중복됩니다.");
-				return;
-			}
+		if(student.indexOf(new Student(num)) != -1) {
+			System.out.println("학번이 중복됩니다.");
+			return;
 		}
 		
 		System.out.println("이름>");
@@ -84,7 +75,6 @@ public class StudentContraller implements StudentProgram {
 		System.out.println("전화번호>");
 		String phone = scan.next();
 		// 전화번호에서 입력 후 enter가 스캐너 버퍼에 남아있음. 
-		
 		scan.nextLine(); // 버퍼에 남아있는 공백을 버림.
 		
 		System.out.println("주소>");
@@ -94,15 +84,15 @@ public class StudentContraller implements StudentProgram {
 		// 학생 객체 생성
 		Student s = new Student(num, name, age, phone, address);
 		student.add(s);
-		
 	}
+
 
 	@Override
 	public void printStudentList() {
 		// 전체 학생 목록 출력 (수강정보X)
 		System.out.println("-- 학생명단 출력 --");
 		// 학생 명단이 배열에 다 차있지 않다면 향상된 for문은 못 씀.
-		for(int i=0; i<cnt; i++) {
+		for(int i=0; i<student.size(); i++) {
 			student.get(i).printInfo(); // 출력 메서드가 있을 경우
 //			System.out.println(student[i]); // toString
 		}
@@ -115,14 +105,14 @@ public class StudentContraller implements StudentProgram {
 		System.out.println("검색할 학생의 학번을 입력>");
 		String num = scan.next();
 		
-		for(int i=0; i<cnt; i++) {
-			if(student.get(i).getStudentNumber().equals(num)) {
-				student.get(i).printInfo();
-				student.get(i).printSubjectList();
-				return;
-			}
+		int index = student.indexOf(new Student(num));
+		
+		if(index == -1) {
+			System.out.println("학생정보가 없습니다.");
+			return;
 		}
-		System.out.println("학생정보가 없습니다.");
+		student.get(index).printInfo();
+		student.get(index).printSubjectList();
 	}
 
 	@Override
@@ -133,26 +123,26 @@ public class StudentContraller implements StudentProgram {
 		// 해당 과목의 객체를 Student 클래스의 insertSubject로 전달
 		System.out.println("학번>");
 		String num = scan.next();
-		
-		for(int i=0; i<cnt; i++) {
-			if(student.get(i).getStudentNumber().equals(num)) {
-				// 해당 학생이 있는 경우
-				printSubList(); // 과목목록 출력 메서드 호출
-				System.out.println("수강과목 선택(번호로 선택)>");
-				int subIndex = scan.nextInt(); 
-				// 번지 = subList[subIndex-1];
-				if(subIndex <= 0 || subIndex > subList.size()) {
-					System.out.println("없는과목입니다.");
-					return;
-				}
-				
-				// subList[subIndex-1]; => 선택한 과목 객체
-				// 학생 클래스에서 과목추가 메서드를 호출
-				student.get(i).insertSubject(subList.get(subIndex));
-				return;
-			}
+		int index = student.indexOf(new Student(num));
+		if(index == -1) {
+			System.out.println("학생정보가 없습니다.");
+			return;
 		}
-		System.out.println("학생정보가 없습니다.");
+		
+		printSubList(); // 과목목록 출력 메서드 호출
+		System.out.println("수강과목 선택(번호로 선택)>");
+		int subIndex = scan.nextInt(); 
+		// 번지 = subList[subIndex-1];
+		if(subIndex <= 0 || subIndex > subList.size()) {
+			System.out.println("없는과목입니다.");
+			return;
+		}
+				
+		// subList[subIndex-1]; => 선택한 과목 객체
+		// 학생 클래스에서 과목추가 메서드를 호출
+		student.get(index).insertSubject(subList.get(subIndex-1));
+		return;
+
 	}
 
 	@Override
@@ -163,25 +153,21 @@ public class StudentContraller implements StudentProgram {
 		System.out.println("학번>");
 		String num = scan.next();
 		
-		for(int i=0; i<cnt; i++) {
-			if(student.get(i).getStudentNumber().equals(num)) {
-				// 내가 신청한 수강신청 리스트를 출력
-				System.out.println("-- 내수강과목 --");
-				student.get(i).printSubjectList();
-				System.out.println("철회할 과목코드 (번호로 입력)>");
-				int subNum = scan.nextInt();
-				
-//				// 수강과목 print 할 때 번호를 붙여 출력한 경우
-//				Subject s = student.get(i).getSubjectList()[subNum-1];
-//				student.get(i).deleteSubject(s);
-				
-				// Subject 객체에 과목코드만 담아 전송
-//				System.out.println("철회할 과목코드 >");
-//				String subNum = scan.next();
-//				Subject s = new Subject();
-//				s.setSubjectCode(subNum);
-//				student[i].deleteSubject(s);
-			}
+		int index = student.indexOf(new Student(num));
+		if(index == -1) {
+			System.out.println("학생정보가 없습니다.");
 		}
+		
+		// 내가 신청한 수강신청 리스트를 출력
+		System.out.println("-- 내수강과목 --");
+		student.get(index).printSubjectList();
+		System.out.println("철회할 과목코드 (번호로 입력)>");
+		int subNum = scan.nextInt();
+		
+		// 수강과목 print 할 때 번호를 붙여 출력한 경우
+		Subject s = student.get(index).getSubjectList().get(subNum-1);
+		student.get(index).deleteSubject(s);
+				
 	}
+
 }

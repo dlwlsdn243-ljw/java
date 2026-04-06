@@ -2,24 +2,28 @@ package studentManager.copy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Student {
 	// 학생정보 클래스 => 학생 1명
 	// 학번, 이름, 나이, 전화번호, 주소, 수강과목[5]
 	// 멤버변수에 배열이 존재하면 index 역할을 하는 변수가 필요
-	
-	
 	private String studentNumber;
 	private String studentName;
 	private int studentAge;
 	private String studentPhone;
 	private String studentAddress;
 	// 학생 1명당 본인이 수강신청한 과목의 목록
-	private List<Subject>subjectList = new ArrayList<Subject>();
-
+	private List<Subject> subjectList = new ArrayList<Subject>();
+	//private int cnt; // index
 	
 	// 생성자
 	public Student() {}
+	
+	// equals 용 생성자
+	public Student(String studentNumber) {
+		this.studentNumber = studentNumber;
+	}
 
 	public Student(String studentNumber, String studentName, int studentAge, String studentPhone,
 			String studentAddress) {
@@ -52,7 +56,6 @@ public class Student {
 	
 	// 수강과목 객체가 들어오면 내 수강배열에 추가
 	// 1. 해당 배열에 이미 동일과목이 있는경우 => 이미 추가한 과목입니다.
-	// 2. 배열이 꽉 찼을 경우 => 새배열을 만들어 배열복사 => 배열주소 변경
 	
 	public void insertSubject(Subject sub) {
 		// nullCheck 메서드로 분리
@@ -60,75 +63,33 @@ public class Student {
 			return;
 		}
 		
-//		if(sub == null) {
-//			return;
-//		}
-//		if(sub.getSubjectCode().isBlank()) {
-//			System.out.println("수강정보가 없습니다.");
-//			return;
-//		}
 		
-		// 배열이 꽉 찼을 경우
-//		if(cnt == subjectList.length) {
-//			// 배열 늘려주기
-//			Subject[] tmp = new Subject[subjectList.length+3];
-//			// 배열복사
-//			System.arraycopy(subjectList, 0, tmp, 0, subjectList.length);
-//			// 기존 배열을 늘려준 배열로 변경
-//			subjectList = tmp;
-//		}
-		
-		// 이미 수강신청을 한 과목일 경우
-		// cnt 까지 배열을 순회 하여 subjectCode가 일치하는 값이 있다면...
-		for(int i=0; i<subjectList.size(); i++) {
-			if(subjectList.get(i).getSubjectCode().equals(sub.getSubjectCode())) {
-				System.out.println("이미 추가한 과목입니다.");
-				return;
-			}
+		// list에 해당 sub 객체가 있는지 확인 있으면 true / false
+		//boolean check = subjectList.contains(sub);
+		if(subjectList.contains(sub)) {
+			System.out.println("이미 추가한 과목입니다.");
+			return;
 		}
 		
 		subjectList.add(sub);
 		System.out.println("수강신청 완료!!");
 	}
 	
-	// 수강과목 객체가 들어오면 내 수강배열에서 삭제
-	public void deleteSubject(Subject sub) {
-		// subjectList에서 sub가 몇번지에 있는지 찾기
-		int index = -1; //없는 번지 설정
-		
+	// 수강과목 객체가 들어오면 내 수강배열에서 삭제 
+	// list method => remove(index) / remove(object) 
+	public void deleteSubject(Subject sub) { // 코드만 있는 Subject 객체
+	
 		// nullCheck 메서드로 분리
 		if(!nullCheck(sub)) {
 			return;
 		}
 		
-		// 배열에서 번지를 찾기
-		for(int i=0; i<subjectList.size(); i++) {
-			if(subjectList.get(i).getSubjectCode().equals(sub.getSubjectCode())) {
-				index = i;
-				break; // 번지를 찾았다면 반복문을 벗어나기.
-			}
-		}
-		
-		subjectList.remove(index);
-		
-		// index 번지 확인 => index = -1 
-		if(index == -1) {
-			// 찾는 값이 없다면...
-			System.out.println("찾는 과목이 없습니다.");
+		if(subjectList.remove(sub)) { // 삭제가 되면 true / false
+			System.out.println("수강철회 완료!!");
 			return;
 		}
+		System.out.println("찾는 과목이 없습니다.");	
 		
-		// index를 찾았다면...
-		// 삭제 : index 번지부터 cnt-1까지 뒷번지(i+1)를 앞으로 옮기는 작업.
-		// 마지막 번지는 null 처리
-//		for(int i=index; i<cnt-1; i++) {
-//			subjectList[i] = subjectList[i+1];
-//		}
-//		
-//		// 마지막 번지는 null 처리
-//		subjectList[cnt-1] = null;
-//		cnt--; 
-		System.out.println("수강철회 완료!!");
 	}
 	
 	
@@ -147,8 +108,9 @@ public class Student {
 			return;
 		}
 		for(int i=0; i<subjectList.size(); i++) {
+			System.out.print(i+1+". ");
 			subjectList.get(i).printSubject();
-			System.out.println(subjectList.get(i)); // toString
+			//System.out.println(subjectList[i]); // toString
 		}
 		System.out.println("---------------");
 	}
@@ -193,15 +155,37 @@ public class Student {
 		this.studentAddress = studentAddress;
 	}
 
+	public List<Subject> getSubjectList() {
+		return subjectList;
+	}
 
-
-
+	public void setSubjectList(List<Subject> subjectList) {
+		this.subjectList = subjectList;
+	}
 
 	@Override
 	public String toString() {
 		return "Student [studentNumber=" + studentNumber + ", studentName=" + studentName + ", studentAge=" + studentAge
 				+ ", studentPhone=" + studentPhone + ", studentAddress=" + studentAddress + ", subjectList="
-				+  "]";
+				+ subjectList + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(studentNumber);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return Objects.equals(studentNumber, other.studentNumber);
+	}
+	
 	
 }
