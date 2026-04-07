@@ -1,4 +1,4 @@
-package day16;
+package day16.copy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,29 +9,18 @@ import java.util.Scanner;
 public class WordController {
 	
 	// map을 사용하여 단어를 저장
-	private Map<String, String> map = new HashMap<>();
+	private Map<String, List<String>> map = new HashMap<>();
 	
-	
-	
+
 	public void addWord() {
 		// 기본 단어 5개 추가
-		map.put("apple", "사과");
-		map.put("banana", "바나나");
-		map.put("kiwi", "키위");
-		map.put("dog", "개");
-		map.put("cat", "고양이");
+	    map.put("apple", new ArrayList<>(List.of("사과")));
+	    map.put("banana", new ArrayList<>(List.of("바나나")));
+	    map.put("kiwi", new ArrayList<>(List.of("키위")));
+	    map.put("dog", new ArrayList<>(List.of("개", "강아지")));
+	    map.put("cat", new ArrayList<>(List.of("고양이")));
 	}
 	
-	public void printWord() {
-		// 단어 출력
-		System.out.println("--단어장--");
-		int cnt=0;
-		for(String s : map.keySet()) {
-			cnt++;
-			System.out.println(cnt+". "+s+":"+map.get(s));
-		}
-		System.out.println("--------------");
-	}
 
 	public void insertWord(Scanner scan) {
 		// 단어등록
@@ -42,7 +31,13 @@ public class WordController {
 		scan.nextLine();  // 입력버퍼 비우기
 		String mean = scan.nextLine(); // 공백 처리가 가능한 입력
 		
-		map.put(word, mean);
+		if (map.containsKey(word)) {
+			map.get(word).add(mean);
+		}else {
+			List<String>list = new ArrayList<String>();
+			list.add(mean);
+			map.put(word, list);
+		}
 		System.out.println("단어추가완료!!");
 	}
 
@@ -76,11 +71,28 @@ public class WordController {
 		
 		System.out.println("뜻>");
 		String mean = scan.nextLine();
-		map.put(word, mean);
+		if (map.containsKey(word)) {
+			map.get(word).add(mean);
+		}else {
+			List<String>list = new ArrayList<String>();
+			list.add(mean);
+			map.put(word, list);
+		}
 		System.out.println("수정완료!!");
 		
 	}
 
+	public void printWord() {
+		// 단어 출력
+		System.out.println("--단어장--");
+		int cnt=0;
+		for(String s : map.keySet()) {
+			cnt++;
+			System.out.println(cnt+". "+s+":"+map.get(s));
+		}
+		System.out.println("--------------");
+	}
+	
 	public void removeWord(Scanner scan) {
 		// 단어삭제
 		System.out.println("단어>");
