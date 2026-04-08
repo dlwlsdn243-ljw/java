@@ -15,41 +15,43 @@ public class WordMain {
 				 * */
 		WordController wc = new WordController();
 				
-				// 단어 미리 등록
-				wc.addWord();
+		// 단어 미리 등록
+		wc.addWord();
 				
-				Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 				
-				int menu = 0;
-				do {
+		int menu = 0;
+		do {
 					
-					System.out.println("1.단어등록|2.단어검색|3.단어수정|\n4.단어출력|5.단어삭제|6.종료");
-					System.out.println("선택>");
-					try {
-						menu = scan.nextInt();
+			System.out.println("1.단어등록|2.단어검색|3.단어수정|\n"
+					+ "4.단어출력|5.단어삭제|6.파일로 출력|7.종료");
+			System.out.println("선택>");
+			try {
+				menu = scan.nextInt();
 						
-						switch(menu) {
-						case 1: wc.insertWord(scan); break;
-						case 2: wc.searchWord(scan); break;
-						case 3: wc.modifyWord(scan); break;
-						case 4: wc.printWord(); break;
-						case 5: wc.removeWord(scan); break;
-						case 6: System.out.println("종료"); break;
-						default: System.out.println("잘못된 메뉴입니다.");
-						}	
+				switch(menu) {
+				case 1: wc.insertWord(scan); break;
+				case 2: wc.searchWord(scan); break;
+				case 3: wc.modifyWord(scan); break;
+				case 4: wc.printWord(); break;
+				case 5: wc.removeWord(scan); break;
+				case 6: wc.output(); break;
+				case 7: System.out.println("종료"); break;
+				default: System.out.println("잘못된 메뉴입니다.");
+				}	
 						
-					} catch (InputMismatchException e) {
-						System.out.println("입력값이 잘못되었습니다.");
-						scan.nextLine(); // 입력버퍼 지우기.
+			} catch (InputMismatchException e) {
+				System.out.println("입력값이 잘못되었습니다.");
+				scan.nextLine(); // 입력버퍼 지우기.
 						
-					} catch (Exception e) {
-						System.out.println("다시 입력해주세요.");
-						scan.nextLine();
-					}
+			} catch (Exception e) {
+				System.out.println("다시 입력해주세요.");
+				scan.nextLine();
+			}
 					
-				}while(menu != 6);
+		}while(menu != 7);
 
-				scan.close();
+		scan.close();
 
 
 	}

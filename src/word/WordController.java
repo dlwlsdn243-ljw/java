@@ -1,5 +1,10 @@
 package word;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -127,6 +132,35 @@ public class WordController {
 		}
 		System.out.println("삭제단어가 없습니다.");
 		
+	}
+	
+	public void output() throws IOException {
+		// 파일로 출력
+		// StringBuffer 객체 사용 => 추가 기능 append()
+		// String 객체의 확장버전
+		// StringBuffer 객체를 => String으로 변환하여 저장
+
+		System.out.println("파일로 출력합니다.");
+		final String fileName = "D:\\java_260403_ljw\\memo\\word.txt";
+		
+		BufferedWriter bw = 
+				new BufferedWriter(new FileWriter(fileName));
+		
+		StringBuffer sb = new StringBuffer();
+		// \n : 줄바꿈.
+		sb.append("--단어장--\r\n");
+		int cnt = 0;
+		for (Word w : wordBook) {
+			cnt++;
+			sb.append(cnt);
+			sb.append(", ");
+			sb.append(w); // toString 모양대로 출력
+			sb.append("\r\n");
+		}
+		bw.write(sb.toString()); // StringBuffer객체를 String객체로 변경
+
+		
+		bw.close();
 	}
 	
 	
