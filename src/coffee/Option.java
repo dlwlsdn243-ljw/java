@@ -1,18 +1,18 @@
 package coffee;
 
 public enum Option {
-	shot(500),
-	whipped_cream(700),
-	syrup(0);
+	SHOT(500),
+	SYRUP(0),
+	WHIPPED_CREAM(700);
 	
-	private final int option;
+	private final int optionPrice;
 	
-	Option(int option){
-		this.option = option;
+	Option(int optionPrice){
+		this.optionPrice = optionPrice;
 	}
 
-	public int getOption() {
-		return option;
+	public int getOptionPrice() {
+		return optionPrice;
 	}
 	
 }

@@ -16,7 +16,7 @@ public class StudentMain {
 		
 		StudentContraller sc = new StudentContraller();
 		Student sc2 = new Student();
-		
+		             
 		// 샘플 데이터 호출할 위치
 		sc.addStudent();
 		sc.addSubject();

@@ -1,39 +1,44 @@
 package coffee;
 
+import java.util.List;
+
 public class Order {
+	
 	private Coffee coffee;
-	private int count;
 	private Size size;
-	private Option option;
+	private List<Option> options;
+	private int quantity; // 수량
 	
-	public Order(Coffee coffee, int count, Size size, Option option) {
+	public Order(Coffee coffee, Size size, List<Option>options, int quantity) {
 		this.coffee = coffee;
-		this.count = count;
 		this.size = size;
-		this.option = option;
+		this.options = options;
+		this.quantity = quantity;
 	}
 	
-	// 가격 계산 메서드
+	
+	// 출력 메서드
+	public void printOrder() {
+		System.out.println("커피:"+coffee);
+		System.out.println("사이즈:"+size);
+		System.out.println("옵션:"+options);
+		System.out.println("수량:"+quantity);
+		System.out.println("총금액:"+ getTotalPrice()+"원");
+		System.out.println("---------------");
+	}
+	
+
 	public int getTotalPrice() {
-		return (coffee.getPrice() + size.getSize() + option.getOption()) * count;
-	}
-	
-	public Option getOption() {
-		return option;
-	}
-
-	public void setOption(Option option) {
-		this.option = option;
-	}
-
-	
-	public Size getSize() {
-		return size;
+		// 총금액 계산
+		int base = coffee.getPrice();
+		int sizePrice = size.getExtraprice();
+		int optionPrice = options.stream()
+				.mapToInt(Option::getOptionPrice)
+				.sum();
+		
+		return (base+sizePrice+optionPrice)*quantity;
 	}
 
-	public void setSize(Size size) {
-		this.size = size;
-	}
 
 
 	public Coffee getCoffee() {
@@ -44,17 +49,29 @@ public class Order {
 		this.coffee = coffee;
 	}
 
-	public int getCount() {
-		return count;
+	public Size getSize() {
+		return size;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setSize(Size size) {
+		this.size = size;
 	}
 
-	@Override
-	public String toString() {
-		return coffee + " / "  +  size + " / " + option + " / " +  count + "개" + " => "+ getTotalPrice();
+	public List<Option> getOptions() {
+		return options;
 	}
 
+	public void setOptions(List<Option> options) {
+		this.options = options;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	
 }

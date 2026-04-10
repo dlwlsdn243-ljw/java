@@ -1,18 +1,20 @@
 package coffee;
 
 public enum Size {
-	small(0),
-	medium(500),
-	large(1000);
+	SMALL(0),
+	MEDIUM(500),
+	LARGE(1000);
 	
-	private final int size;
+	private final int extraprice;
 	
-	Size(int size){
-		this.size = size;
+	Size(int extraprice){
+		this.extraprice = extraprice;
 	}
 
-	public int getSize() {
-		return size;
+	public int getExtraprice() {
+		return extraprice;
 	}
+
+
 	
 }

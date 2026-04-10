@@ -1,10 +1,10 @@
 package coffee;
 
 public enum Coffee {
-	AMERICANO(2000),
-	LATTE(3800),
+	AMERICANO(3000),
+	LATTE(4000),
 	CAPPUCCINO(4500),
-	MOCHA(4300);
+	MOCHA(5000);
 	
 	private final int price;
 	
